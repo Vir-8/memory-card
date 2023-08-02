@@ -3,16 +3,19 @@ import { useEffect, useRef, useState } from "react";
 let usedNumbers = [];
 let selectedNumbers = [];
 
-const Image = ({ onImageClick, onImageLoad, pokemonNumber }) => {
+const Image = ({ onImageClick, onImageLoad, pokemonNumber, pokemonName }) => {
 	console.log("creating " + pokemonNumber);
 
 	return (
-		<img
-			src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonNumber}.png`}
-			className="logo"
-			onClick={onImageClick}
-			onLoad={onImageLoad}
-		/>
+		<div>
+			<img
+				src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonNumber}.png`}
+				className="logo"
+				onClick={onImageClick}
+				onLoad={onImageLoad}
+			/>
+			<p>{pokemonName}</p>
+		</div>
 	);
 };
 
@@ -34,19 +37,40 @@ function ImageGenerator({ getScore }) {
 				usedNumbers.push(pokemonNumber);
 
 				promises.push(
-					Promise.resolve(
-						<Image
-							key={i}
-							onImageClick={() => handleImageClick(pokemonNumber)}
-							pokemonNumber={pokemonNumber}
-						/>
-					)
+					// Using fetch to get the Pokemon name from PokeAPI
+					fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonNumber}`)
+						.then((response) => {
+							if (!response.ok) {
+								throw new Error("Failed to fetch Pokemon data");
+							}
+							let pokemonData = response.json();
+							return pokemonData;
+						})
+						.then((pokemonData) => {
+							const namesData = pokemonData.names;
+							const nameData = namesData.find(
+								(name) => name.language.name === "en"
+							);
+							const pokemonName = nameData ? nameData.name : null;
+							return (
+								<Image
+									key={i}
+									onImageClick={() => handleImageClick(pokemonNumber)}
+									pokemonNumber={pokemonNumber}
+									pokemonName={pokemonName}
+								/>
+							);
+						})
+						.catch((error) => {
+							console.error("Error fetching Pokemon data:", error);
+						})
 				);
 			}
 			newImages = await Promise.all(promises);
 
 			const divElement = (
 				<div
+					className="imageContainer"
 					ref={containerRef}
 					style={{
 						display: "none",
@@ -58,7 +82,7 @@ function ImageGenerator({ getScore }) {
 			setImages(divElement);
 			setTimeout(() => {
 				setLoading(false);
-				containerRef.current.style.display = "block";
+				containerRef.current.style.display = "flex";
 			}, 800);
 		};
 
