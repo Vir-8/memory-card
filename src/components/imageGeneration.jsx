@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 let usedNumbers = [];
+let selectedNumbers = [];
 
 const Image = ({ onImageClick, onImageLoad, pokemonNumber }) => {
 	console.log("creating " + pokemonNumber);
@@ -15,7 +16,7 @@ const Image = ({ onImageClick, onImageLoad, pokemonNumber }) => {
 	);
 };
 
-function ImageGenerator() {
+function ImageGenerator({ getScore }) {
 	const [images, setImages] = useState([]);
 	const [isLoading, setLoading] = useState(true);
 	const containerRef = useRef(null);
@@ -36,7 +37,7 @@ function ImageGenerator() {
 					Promise.resolve(
 						<Image
 							key={i}
-							onImageClick={regenerateImages}
+							onImageClick={() => handleImageClick(pokemonNumber)}
 							pokemonNumber={pokemonNumber}
 						/>
 					)
@@ -48,7 +49,7 @@ function ImageGenerator() {
 				<div
 					ref={containerRef}
 					style={{
-						visibility: "hidden",
+						display: "none",
 					}}>
 					{newImages}
 				</div>
@@ -57,20 +58,29 @@ function ImageGenerator() {
 			setImages(divElement);
 			setTimeout(() => {
 				setLoading(false);
-				containerRef.current.style.visibility = "visible";
-			}, 300);
+				containerRef.current.style.display = "block";
+			}, 800);
+		};
+
+		const handleImageClick = (pokemonNumber) => {
+			if (selectedNumbers.includes(pokemonNumber)) {
+				alert("already selected, you lose");
+			} else {
+				selectedNumbers.push(pokemonNumber);
+				getScore();
+			}
+			regenerateImages();
+		};
+
+		const regenerateImages = async () => {
+			usedNumbers = [];
+			setImages([]);
+			setLoading(true);
+			containerRef.current.style.display = "none";
+			await GenerateImages();
 		};
 
 		GenerateImages();
-
-		async function regenerateImages() {
-			usedNumbers = [];
-			console.log(usedNumbers);
-			setImages([]);
-			setLoading(true);
-			containerRef.current.style.visibility = "hidden";
-			await GenerateImages();
-		}
 	}, []);
 
 	return (
