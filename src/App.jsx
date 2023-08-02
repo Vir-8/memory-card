@@ -7,19 +7,24 @@ import Score from "./components/score";
 
 function App() {
 	const [score, setScore] = useState(0);
+	const [bestScore, setBestScore] = useState(0);
 
 	const updateScore = () => {
 		setScore((prevScore) => prevScore + 1);
 	};
 
-	useEffect(() => {
-		console.log("Score updated:", score);
-	}, [score]);
+	const updateBestScore = (newBestScore) => {
+		setBestScore(newBestScore);
+	};
 
 	return (
 		<>
-			<Score score={score} />
-			<ImageGenerator getScore={updateScore} />
+			<Score
+				score={score}
+				bestScore={bestScore}
+				updateBestScore={updateBestScore}
+			/>
+			<ImageGenerator score={score} getScore={updateScore} />
 		</>
 	);
 }
