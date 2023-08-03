@@ -24,31 +24,20 @@ function App() {
 	};
 
 	const loadGen = (gen) => {
-		if (gen === "1") {
-			setMin(1);
-			setMax(151);
-		} else if (gen === "2") {
-			setMin(152);
-			setMax(251);
-		} else if (gen === "3") {
-			setMin(252);
-			setMax(386);
-		} else if (gen === "4") {
-			setMin(387);
-			setMax(493);
-		} else if (gen === "5") {
-			setMin(494);
-			setMax(649);
-		} else if (gen === "6") {
-			setMin(650);
-			setMax(721);
-		} else if (gen === "7") {
-			setMin(722);
-			setMax(809);
-		} else if (gen === "8") {
-			setMin(810);
-			setMax(905);
-		}
+		const genRanges = {
+			1: { min: 1, max: 151 },
+			2: { min: 152, max: 251 },
+			3: { min: 252, max: 386 },
+			4: { min: 387, max: 493 },
+			5: { min: 494, max: 649 },
+			6: { min: 650, max: 721 },
+			7: { min: 722, max: 809 },
+			8: { min: 810, max: 905 },
+		};
+
+		const { min, max } = genRanges[gen] || { min: 0, max: 0 };
+		setMin(min);
+		setMax(max);
 
 		setGenLoaded(true);
 	};
