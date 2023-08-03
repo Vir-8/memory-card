@@ -1,34 +1,18 @@
 import { useEffect, useRef, useState } from "react";
+import Image from "./image";
 
 let usedNumbers = [];
 let selectedNumbers = [];
 
-const Image = ({ onImageClick, onImageLoad, pokemonNumber, pokemonName }) => {
-	console.log("creating " + pokemonNumber);
-
-	return (
-		<div>
-			<img
-				src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonNumber}.png`}
-				className="logo"
-				onClick={onImageClick}
-				onLoad={onImageLoad}
-			/>
-			<p>{pokemonName}</p>
-		</div>
-	);
-};
-
-const getPokemonNumber = () => {
+const getPokemonNumber = (min, max) => {
 	let i;
 	do {
-		i = Math.floor(Math.random() * 151) + 1;
+		i = min + Math.floor(Math.random() * (max - min + 1));
 	} while (usedNumbers.includes(i));
-
 	return i;
 };
 
-function ImageGenerator({ getScore }) {
+function ImageGenerator({ getScore, min, max }) {
 	const [images, setImages] = useState([]);
 	const [isLoading, setLoading] = useState(true);
 	const containerRef = useRef(null);
@@ -37,8 +21,9 @@ function ImageGenerator({ getScore }) {
 	useEffect(() => {
 		const GenerateImages = async () => {
 			let promises = [];
+
 			for (let i = 0; i < 10; i++) {
-				let pokemonNumber = getPokemonNumber();
+				let pokemonNumber = getPokemonNumber(min, max);
 				usedNumbers.push(pokemonNumber);
 
 				promises.push(
