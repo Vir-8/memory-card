@@ -19,6 +19,15 @@ const Image = ({ onImageClick, onImageLoad, pokemonNumber, pokemonName }) => {
 	);
 };
 
+const getPokemonNumber = () => {
+	let i;
+	do {
+		i = Math.floor(Math.random() * 151) + 1;
+	} while (usedNumbers.includes(i));
+
+	return i;
+};
+
 function ImageGenerator({ getScore }) {
 	const [images, setImages] = useState([]);
 	const [isLoading, setLoading] = useState(true);
@@ -29,11 +38,7 @@ function ImageGenerator({ getScore }) {
 		const GenerateImages = async () => {
 			let promises = [];
 			for (let i = 0; i < 10; i++) {
-				let pokemonNumber;
-
-				do {
-					pokemonNumber = Math.floor(Math.random() * 151) + 1;
-				} while (usedNumbers.includes(pokemonNumber));
+				let pokemonNumber = getPokemonNumber();
 				usedNumbers.push(pokemonNumber);
 
 				promises.push(
@@ -89,9 +94,10 @@ function ImageGenerator({ getScore }) {
 		const handleImageClick = (pokemonNumber) => {
 			if (selectedNumbers.includes(pokemonNumber)) {
 				alert("already selected, you lose");
+				getScore("lose");
 			} else {
 				selectedNumbers.push(pokemonNumber);
-				getScore();
+				getScore("win");
 			}
 			regenerateImages();
 		};

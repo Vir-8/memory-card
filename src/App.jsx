@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { useState } from "react";
 import "./App.css";
 import ImageGenerator from "./components/imageGeneration";
 import Score from "./components/score";
@@ -9,8 +7,12 @@ function App() {
 	const [score, setScore] = useState(0);
 	const [bestScore, setBestScore] = useState(0);
 
-	const updateScore = () => {
-		setScore((prevScore) => prevScore + 1);
+	const updateScore = (status) => {
+		if (status == "win") {
+			setScore((prevScore) => prevScore + 1);
+		} else if (status == "lose") {
+			setScore(0);
+		}
 	};
 
 	const updateBestScore = (newBestScore) => {
