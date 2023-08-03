@@ -79,6 +79,7 @@ function ImageGenerator({ getScore, min, max }) {
 		const handleImageClick = (pokemonNumber) => {
 			if (selectedNumbers.includes(pokemonNumber)) {
 				alert("already selected, you lose");
+				selectedNumbers = [];
 				getScore("lose");
 			} else {
 				selectedNumbers.push(pokemonNumber);
