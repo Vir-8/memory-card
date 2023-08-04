@@ -1,6 +1,6 @@
 import Image from "../components/image";
 
-export const getPokemonNumber = (min, max, pokeNumbers) => {
+export const getPokemonNumber = (score, min, max, pokeNumbers) => {
 	let pokemonNum;
 	if (pokeNumbers.length === 0) {
 		for (let i = 0; i < 10; i++) {
@@ -10,6 +10,17 @@ export const getPokemonNumber = (min, max, pokeNumbers) => {
 			pokeNumbers.push(pokemonNum);
 		}
 	}
+
+	if (score > 0 && (score + 1) % 7 === 0) {
+		pokeNumbers = [];
+		for (let j = 0; j < 10; j++) {
+			do {
+				pokemonNum = min + Math.floor(Math.random() * (max - min + 1));
+			} while (pokeNumbers.includes(pokemonNum));
+			pokeNumbers.push(pokemonNum);
+		}
+	}
+	return pokeNumbers;
 };
 
 export function shuffleArray(array) {

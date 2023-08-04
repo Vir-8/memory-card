@@ -6,16 +6,17 @@ import { getPokemonNumber, shuffleArray } from "./pokemonData";
 let pokeNumbers = [];
 let selectedNumbers = [];
 
-function ImageGenerator({ getScore, min, max }) {
+function ImageGenerator({ score, getScore, min, max }) {
 	const [images, setImages] = useState([]);
 	const [isLoading, setLoading] = useState(true);
 	const containerRef = useRef(null);
+	const timeoutRef = useRef(1000);
 	let newImages = [];
 
-	getPokemonNumber(min, max, pokeNumbers);
-	shuffleArray(pokeNumbers);
+	pokeNumbers = getPokemonNumber(score, min, max, pokeNumbers);
 
 	const GenerateImages = async () => {
+		shuffleArray(pokeNumbers);
 		let promises = pokeNumbers.map((pokemonNumber) =>
 			fetchPokemonData(pokemonNumber, handleImageClick)
 		);
@@ -33,10 +34,11 @@ function ImageGenerator({ getScore, min, max }) {
 		);
 
 		setImages(divElement);
+
 		setTimeout(() => {
 			setLoading(false);
 			containerRef.current.style.display = "flex";
-		}, 100);
+		}, timeoutRef.current);
 	};
 
 	const handleImageClick = (pokemonNumber) => {
@@ -61,6 +63,10 @@ function ImageGenerator({ getScore, min, max }) {
 	useEffect(() => {
 		GenerateImages();
 	}, []);
+
+	useEffect(() => {
+		timeoutRef.current = score === 0 || score % 7 === 0 ? 5000 : 100;
+	}, [score]);
 
 	return (
 		<>
