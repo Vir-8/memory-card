@@ -65,7 +65,7 @@ function ImageGenerator({ score, getScore, min, max }) {
 	}, []);
 
 	useEffect(() => {
-		timeoutRef.current = score === 0 || score % 7 === 0 ? 5000 : 100;
+		timeoutRef.current = score === 0 || score % 7 === 0 ? 2000 : 100;
 	}, [score]);
 
 	return (
