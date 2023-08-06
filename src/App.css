@@ -81,6 +81,7 @@
 .menuButton {
   font-size: 1.4em;
   padding: 0.8em 2em;
+  color: white;
 }
 
 .menuButtonContainer {
@@ -110,4 +111,5 @@
 
 .backButtonContainer button {
   width: 80px;
+  color: white;
 }
