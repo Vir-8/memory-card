@@ -48,6 +48,35 @@
   gap: 20px;
 }
 
+@media screen and (max-width: 870px) {
+  .imageContainer {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 10px;
+  }
+}
+
+/* Media query for even smaller screens (e.g., mobile) */
+@media screen and (max-width: 700px) {
+  .imageContainer {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 5px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .imageContainer {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 5px;
+  }
+
+  .backButtonContainer {
+    margin-bottom: 50px;
+  }
+}
+
 .imageContainer p {
   font-weight: 500;
   margin-top: 0;
