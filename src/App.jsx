@@ -3,6 +3,7 @@ import "./App.css";
 import ImageGenerator from "./scripts/imageGenerator";
 import Score from "./components/score";
 import GenButton from "./components/genButton";
+import StartMenu from "./components/startMenu";
 
 function App() {
 	const [score, setScore] = useState(0);
@@ -38,7 +39,7 @@ function App() {
 
 	return (
 		<>
-			{genLoaded ? (
+			{genLoaded && (
 				<>
 					<Score
 						score={score}
@@ -52,18 +53,21 @@ function App() {
 						max={max}
 					/>
 				</>
-			) : null}
-			{menuLoaded && (
-				<>
-					{genValues.map((gen) => (
-						<GenButton key={gen} gen={gen} loadGen={loadGen}></GenButton>
-					))}
-				</>
 			)}
+
+			{menuLoaded && (
+				<div className="menu">
+					<h1 className="menuHeader">Select generation!</h1>
+					<div className="menuButtonContainer">
+						{genValues.map((gen) => (
+							<GenButton key={gen} gen={gen} loadGen={loadGen}></GenButton>
+						))}
+					</div>
+				</div>
+			)}
+
 			{!menuLoaded && !genLoaded && (
-				<>
-					<button onClick={showMenu}>Start!</button>
-				</>
+				<StartMenu onButtonClick={showMenu}></StartMenu>
 			)}
 		</>
 	);
