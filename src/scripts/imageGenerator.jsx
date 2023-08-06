@@ -6,14 +6,18 @@ import { getPokemonNumber, shuffleArray } from "./pokemonData";
 let pokeNumbers = [];
 let selectedNumbers = [];
 
-function ImageGenerator({ score, getScore, min, max }) {
+const state = {
+	pokeNumbers: [],
+};
+
+function ImageGenerator({ score, getScore, status, updateStatus, min, max }) {
 	const [images, setImages] = useState([]);
-	const [isLoading, setLoading] = useState(true);
 	const containerRef = useRef(null);
 	const timeoutRef = useRef(1000);
 	let newImages = [];
 
-	pokeNumbers = getPokemonNumber(score, min, max, pokeNumbers);
+	pokeNumbers = state.pokeNumbers;
+	state.pokeNumbers = getPokemonNumber(score, min, max, pokeNumbers);
 
 	const GenerateImages = async () => {
 		shuffleArray(pokeNumbers);
@@ -36,7 +40,7 @@ function ImageGenerator({ score, getScore, min, max }) {
 		setImages(divElement);
 
 		setTimeout(() => {
-			setLoading(false);
+			updateStatus(true);
 			containerRef.current.style.display = "grid";
 		}, timeoutRef.current);
 	};
@@ -55,7 +59,7 @@ function ImageGenerator({ score, getScore, min, max }) {
 
 	const regenerateImages = async () => {
 		setImages([]);
-		setLoading(true);
+		updateStatus(false);
 		containerRef.current.style.display = "none";
 		await GenerateImages();
 	};
@@ -70,10 +74,11 @@ function ImageGenerator({ score, getScore, min, max }) {
 
 	return (
 		<>
-			{isLoading && <h1>Loading...</h1>}
+			{!status && <h1>Loading...</h1>}
 			{images}
 		</>
 	);
 }
 
 export default ImageGenerator;
+export { state };

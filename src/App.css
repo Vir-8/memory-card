@@ -101,3 +101,13 @@
 .startMenuHeader {
   width: 500px;
 }
+
+.backButtonContainer {
+  display: flex;
+  /* Add flex styles to a new container */
+  flex-direction: column;
+}
+
+.backButtonContainer button {
+  width: 80px;
+}
