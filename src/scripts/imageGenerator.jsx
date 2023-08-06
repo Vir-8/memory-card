@@ -37,7 +37,7 @@ function ImageGenerator({ score, getScore, min, max }) {
 
 		setTimeout(() => {
 			setLoading(false);
-			containerRef.current.style.display = "flex";
+			containerRef.current.style.display = "grid";
 		}, timeoutRef.current);
 	};
 

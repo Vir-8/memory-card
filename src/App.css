@@ -42,6 +42,62 @@
 }
 
 .imageContainer {
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 20px;
+}
+
+.imageContainer p {
+  font-weight: 500;
+  margin-top: 0;
+}
+
+.startButton {
+  font-size: 1.4em;
+  padding: 1em 2.2em;
+  color: white;
+  border-color: #0075BE;
+}
+
+.startButton:hover {
+  border-color: #FFCC00;
+}
+
+.menu, .startMenu {
+  display: flex;
   justify-content: center;
+}
+
+.menuHeader, .startMenuHeader {
+  position: fixed;
+  top: 60px;
+  text-align: center;
+  color: #FFCC00;
+  font-size: 60px;
+  text-shadow: 0 0 25px #0075BE;
+}
+
+.menuButton {
+  font-size: 1.4em;
+  padding: 0.8em 2em;
+}
+
+.menuButtonContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.scoreHeader {
+  margin-top: -40px;
+}
+
+.startMenu {
+  display: flex;
+  justify-content: center;
+}
+
+.startMenuHeader {
+  width: 500px;
 }

@@ -14,6 +14,7 @@ const GenButton = ({ gen, loadGen }) => {
 
 	return (
 		<button
+			className="menuButton"
 			onClick={() => {
 				loadGen(min, max);
 			}}>
