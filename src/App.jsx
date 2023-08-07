@@ -43,6 +43,7 @@ function App() {
 		state.pokeNumbers = [];
 		setGenLoaded(false);
 		setGenImagesLoaded(false);
+		setDifficultyMenuLoaded(false);
 		setScore(0);
 		setMenuLoaded(true);
 	};
@@ -113,6 +114,11 @@ function App() {
 							<DiffcultyButton difficulty={"Hard"} loadGen={loadGen} />
 						</div>
 					</div>
+					<BackButton
+						showMenu={showMenu}
+						status={difficultyMenuLoaded}
+						newClass={"difficultyBackButton"}
+					/>
 				</>
 			)}
 

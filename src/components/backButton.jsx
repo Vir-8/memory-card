@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { state } from "../scripts/imageGenerator";
 
-const BackButton = ({ showMenu, status }) => {
+const BackButton = ({ showMenu, status, newClass }) => {
 	return (
 		<>
 			{status && (
 				<button
-					className="backButton"
+					className={`backButton ${newClass}`}
 					onClick={() => {
 						showMenu();
 					}}>
