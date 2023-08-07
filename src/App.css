@@ -1,3 +1,7 @@
+body {
+  overflow-x: hidden;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -10,10 +14,14 @@
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
+  transition: transform 0.2s ease-in-out;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
+  transform: scale(1.4);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -37,10 +45,6 @@
   padding: 2em;
 }
 
-.read-the-docs {
-  color: #888;
-}
-
 .imageContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -58,15 +62,23 @@
   padding: 1em 2.2em;
   color: white;
   border-color: #0075BE;
+  transition: transform 0.2s ease-in-out;
+  animation: startup 0.5s ease-in-out;
 }
 
 .startButton:hover {
   border-color: #FFCC00;
+  transform: scale(1.08);
 }
 
 .menu, .startMenu {
   display: flex;
   justify-content: center;
+}
+
+.menuHeader {
+  letter-spacing: -3px;
+  font-weight: 800;
 }
 
 .menuHeader, .startMenuHeader {
@@ -78,20 +90,101 @@
   text-shadow: 0 0 25px #0075BE;
 }
 
+.startMenuHeader {
+  animation: startup 0.5s ease-in-out;
+}
+
+.menuHeader {
+  animation: drop 0.55s ease-in-out
+}
+
+
 .menuButton {
   font-size: 1.4em;
   padding: 0.8em 2em;
   color: white;
+  transition: transform 0.2s ease-in-out;
+}
+
+.menuButton:hover {
+  transform: scale(1.1);
 }
 
 .menuButtonContainer {
   display: grid;
+  position: relative;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+  animation: slide 0.6s ease-in-out;
+}
+
+@keyframes startup {
+  0% {
+    transform: scaleX(0);
+  }
+
+  40% {
+    transform: scaleX(1.5);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes drop {
+  0% {
+    top: -100px;
+    transform: scaleX(0);
+  }
+
+  80% {
+    top: none;
+    transform: scaleX(1.3);
+  }
+
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes slide {
+  from {
+    left: -700px;
+  }
+  to {
+    left: 0px;
+  }
 }
 
 .scoreHeader {
+  position: relative;
   margin-top: -40px;
+  animation: scoreSlide 0.6s ease-in-out;
+}
+
+.bestScore {
+  position: relative;
+  animation: bestScoreSlide 0.6s ease-in-out;
+}
+
+@keyframes scoreSlide {
+  from {
+    left: -700px;
+  }
+  to {
+    left: 0px;
+  }
+}
+
+@keyframes bestScoreSlide {
+  from {
+    right: -700px;
+  }
+
+  to {
+    right: 0px;
+  }
 }
 
 .startMenu {
@@ -105,8 +198,8 @@
 
 .backButtonContainer {
   display: flex;
-  /* Add flex styles to a new container */
-  flex-direction: column;
+  position: relative;
+  z-index: 40;
 }
 
 .backButtonContainer button {

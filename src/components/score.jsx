@@ -19,7 +19,7 @@ const Score = ({ score, bestScore, updateBestScore }) => {
 	return (
 		<>
 			<h1 className="scoreHeader">Score: {score}</h1>
-			<p>Best Score: {bestScore}</p>
+			<p className="bestScore">Best Score: {bestScore}</p>
 		</>
 	);
 };
