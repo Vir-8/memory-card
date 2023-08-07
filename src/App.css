@@ -117,15 +117,24 @@ body {
   animation: slide 0.6s ease-in-out;
 }
 
+.difficultyButtonContainer {
+  display: grid;
+  position: relative;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  animation: slide 0.6s ease-in-out;
+    
+}
+
 .scoreHeader {
   position: relative;
   margin-top: -40px;
-  animation: scoreSlide 0.6s ease-in-out;
+  animation: scoreSlide 0.8s ease-in-out;
 }
 
 .bestScore {
   position: relative;
-  animation: bestScoreSlide 0.6s ease-in-out;
+  animation: bestScoreSlide 0.8s ease-in-out;
 }
 
 .startMenu {
@@ -188,6 +197,13 @@ body {
   .menuButtonContainer {
     margin-top: 150px;
   }
+
+  .difficultyButtonContainer {
+    display: grid;
+    position: relative;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+  }
 }
 
 @media screen and (max-width: 520px) {
@@ -209,6 +225,12 @@ body {
     padding-top: 150px;
     margin-top: 70px;
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 418px) {
+  .difficultyButtonContainer {
+    margin-top: 150px;
   }
 }
 

@@ -6,6 +6,7 @@ import GenButton from "./components/genButton";
 import StartMenu from "./components/startMenu";
 import { state } from "./scripts/imageGenerator";
 import BackButton from "./components/backButton";
+import DiffcultyButton from "./components/difficultyButton";
 
 function App() {
 	const [score, setScore] = useState(0);
@@ -13,6 +14,10 @@ function App() {
 	const [genLoaded, setGenLoaded] = useState(false);
 	const [menuLoaded, setMenuLoaded] = useState(false);
 	const [genImagesLoaded, setGenImagesLoaded] = useState(false);
+
+	const [genDifficulty, setGenDifficulty] = useState(0);
+	const [difficultyMenuLoaded, setDifficultyMenuLoaded] = useState(false);
+
 	const [min, setMin] = useState(0);
 	const [max, setMax] = useState(0);
 	const genValues = ["1", "2", "3", "4", "5", "6", "7", "8"];
@@ -42,10 +47,16 @@ function App() {
 		setMenuLoaded(true);
 	};
 
-	const loadGen = (min, max) => {
+	const loadDifficultyMenu = (min, max) => {
 		setMin(min);
 		setMax(max);
 		setMenuLoaded(false);
+		setDifficultyMenuLoaded(true);
+	};
+
+	const loadGen = (difficulty) => {
+		setDifficultyMenuLoaded(false);
+		setGenDifficulty(difficulty);
 		setGenLoaded(true);
 	};
 
@@ -73,6 +84,7 @@ function App() {
 						updateStatus={updateImageStatus}
 						min={min}
 						max={max}
+						difficulty={genDifficulty}
 					/>
 				</>
 			)}
@@ -82,13 +94,29 @@ function App() {
 					<h1 className="menuHeader">Select generation!</h1>
 					<div className="menuButtonContainer">
 						{genValues.map((gen) => (
-							<GenButton key={gen} gen={gen} loadGen={loadGen}></GenButton>
+							<GenButton
+								key={gen}
+								gen={gen}
+								loadDifficultyMenu={loadDifficultyMenu}></GenButton>
 						))}
 					</div>
 				</div>
 			)}
 
-			{!menuLoaded && !genLoaded && (
+			{difficultyMenuLoaded && (
+				<>
+					<div className="menu">
+						<h1 className="menuHeader">Select Difficulty</h1>
+						<div className="difficultyButtonContainer">
+							<DiffcultyButton difficulty={"Easy"} loadGen={loadGen} />
+							<DiffcultyButton difficulty={"Medium"} loadGen={loadGen} />
+							<DiffcultyButton difficulty={"Hard"} loadGen={loadGen} />
+						</div>
+					</div>
+				</>
+			)}
+
+			{!menuLoaded && !genLoaded && !difficultyMenuLoaded && (
 				<>
 					<h2 className="gameNameHeader">A Pokémon Memory Game</h2>
 					<StartMenu onButtonClick={showMenu}></StartMenu>

@@ -3,17 +3,28 @@ import Image from "../components/image";
 import fetchPokemonData from "./pokemonData";
 import { getPokemonNumber, shuffleArray } from "./pokemonData";
 
-let selectedNumbers = [];
-
 const state = {
 	pokeNumbers: [],
+	selectedNumbers: [],
+	reloadNumber: 0,
 };
 
-function ImageGenerator({ score, getScore, status, updateStatus, min, max }) {
+function ImageGenerator(props) {
+	const { score, getScore, status, updateStatus, min, max, difficulty } = props;
+
 	const [images, setImages] = useState([]);
 	const containerRef = useRef(null);
 	const timeoutRef = useRef(1000);
+	const [reloadNumber, setReloadNumber] = useState(0);
 	let newImages = [];
+
+	if (difficulty === "Easy") {
+		state.reloadNumber = 4;
+	} else if (difficulty === "Medium") {
+		state.reloadNumber = 6;
+	} else if (difficulty === "Hard") {
+		state.reloadNumber = 8;
+	}
 
 	const GenerateImages = async () => {
 		getPokemonNumber(score, min, max);
@@ -44,12 +55,12 @@ function ImageGenerator({ score, getScore, status, updateStatus, min, max }) {
 	};
 
 	const handleImageClick = (pokemonNumber) => {
-		if (selectedNumbers.includes(pokemonNumber)) {
+		if (state.selectedNumbers.includes(pokemonNumber)) {
 			alert("already selected, you lose");
-			selectedNumbers = [];
+			state.selectedNumbers = [];
 			getScore("lose");
 		} else {
-			selectedNumbers.push(pokemonNumber);
+			state.selectedNumbers.push(pokemonNumber);
 			getScore("win");
 		}
 		regenerateImages();
@@ -67,7 +78,8 @@ function ImageGenerator({ score, getScore, status, updateStatus, min, max }) {
 	}, []);
 
 	useEffect(() => {
-		timeoutRef.current = score === 0 || score % 7 === 0 ? 2000 : 100;
+		setReloadNumber(state.reloadNumber);
+		timeoutRef.current = score === 0 || score % reloadNumber === 0 ? 2000 : 100;
 		getPokemonNumber(score, min, max);
 	}, [score]);
 

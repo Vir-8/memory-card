@@ -1,4 +1,4 @@
-const GenButton = ({ gen, loadGen }) => {
+const GenButton = ({ gen, loadDifficultyMenu }) => {
 	const genRanges = {
 		1: { min: 1, max: 151 },
 		2: { min: 152, max: 251 },
@@ -16,7 +16,7 @@ const GenButton = ({ gen, loadGen }) => {
 		<button
 			className="menuButton"
 			onClick={() => {
-				loadGen(min, max);
+				loadDifficultyMenu(min, max);
 			}}>
 			Gen {gen}
 		</button>

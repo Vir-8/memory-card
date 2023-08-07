@@ -2,28 +2,42 @@ import Image from "../components/image";
 import { state } from "./imageGenerator";
 
 export const getPokemonNumber = (score, min, max) => {
-	let pokemonNum;
+	let newMons = 0;
+
 	if (state.pokeNumbers.length === 0) {
-		for (let i = 0; i < 10; i++) {
-			do {
-				pokemonNum = min + Math.floor(Math.random() * (max - min + 1));
-			} while (state.pokeNumbers.includes(pokemonNum));
-			state.pokeNumbers.push(pokemonNum);
+		generateNewImages(min, max, score);
+	}
+
+	if (score > 0 && (score + 1) % state.reloadNumber === 0) {
+		state.pokeNumbers = [];
+		generateNewImages(min, max);
+	}
+
+	for (let k = 0; k < 10; k++) {
+		if (!state.selectedNumbers.includes(state.pokeNumbers[k])) {
+			newMons++;
 		}
 	}
 
-	if (score > 0 && (score + 1) % 7 === 0) {
+	//make sure all mons havent already been selected
+	if (newMons < 2) {
 		state.pokeNumbers = [];
-		for (let j = 0; j < 10; j++) {
-			do {
-				pokemonNum = min + Math.floor(Math.random() * (max - min + 1));
-			} while (state.pokeNumbers.includes(pokemonNum));
-			state.pokeNumbers.push(pokemonNum);
-		}
+		generateNewImages(min, max);
 	}
 
 	return state.pokeNumbers;
 };
+
+function generateNewImages(min, max) {
+	let pokemonNum;
+
+	for (let i = 0; i < 10; i++) {
+		do {
+			pokemonNum = min + Math.floor(Math.random() * (max - min + 1));
+		} while (state.pokeNumbers.includes(pokemonNum));
+		state.pokeNumbers.push(pokemonNum);
+	}
+}
 
 export function shuffleArray(array) {
 	for (let i = array.length - 1; i > 0; i--) {
