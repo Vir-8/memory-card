@@ -3,7 +3,6 @@ import Image from "../components/image";
 import fetchPokemonData from "./pokemonData";
 import { getPokemonNumber, shuffleArray } from "./pokemonData";
 
-let pokeNumbers = [];
 let selectedNumbers = [];
 
 const state = {
@@ -16,12 +15,11 @@ function ImageGenerator({ score, getScore, status, updateStatus, min, max }) {
 	const timeoutRef = useRef(1000);
 	let newImages = [];
 
-	pokeNumbers = state.pokeNumbers;
-	state.pokeNumbers = getPokemonNumber(score, min, max, pokeNumbers);
-
 	const GenerateImages = async () => {
-		shuffleArray(pokeNumbers);
-		let promises = pokeNumbers.map((pokemonNumber) =>
+		getPokemonNumber(score, min, max);
+
+		shuffleArray(state.pokeNumbers);
+		let promises = state.pokeNumbers.map((pokemonNumber) =>
 			fetchPokemonData(pokemonNumber, handleImageClick)
 		);
 
@@ -70,6 +68,7 @@ function ImageGenerator({ score, getScore, status, updateStatus, min, max }) {
 
 	useEffect(() => {
 		timeoutRef.current = score === 0 || score % 7 === 0 ? 2000 : 100;
+		getPokemonNumber(score, min, max);
 	}, [score]);
 
 	return (

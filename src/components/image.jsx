@@ -1,6 +1,4 @@
 const Image = ({ onImageClick, onImageLoad, pokemonNumber, pokemonName }) => {
-	console.log("creating " + pokemonNumber);
-
 	return (
 		<div>
 			<img

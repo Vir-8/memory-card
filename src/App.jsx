@@ -25,6 +25,7 @@ function App() {
 		if (status == "win") {
 			setScore((prevScore) => prevScore + 1);
 		} else if (status == "lose") {
+			state.pokeNumbers = [];
 			setScore(0);
 		}
 	};
@@ -35,7 +36,6 @@ function App() {
 
 	const showMenu = () => {
 		state.pokeNumbers = [];
-		console.log(state.pokeNumbers);
 		setGenLoaded(false);
 		setGenImagesLoaded(false);
 		setScore(0);
