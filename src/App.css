@@ -58,12 +58,13 @@ body {
 }
 
 .startButton {
+  position: relative;
   font-size: 1.4em;
   padding: 1em 2em;
   color: white;
   border-color: #0075BE;
   transition: transform 0.2s ease-in-out;
-  animation: startup 0.5s ease-in-out;
+  animation: rightSlide 0.7s ease-in-out;
 }
 
 .startButton:hover {
@@ -90,8 +91,8 @@ body {
   text-shadow: 0 0 25px #0075BE;
 }
 
-.startMenuHeader {
-  animation: startup 0.5s ease-in-out;
+.animateHeader {
+  animation: startup 0.5s ease-in-out forwards;
 }
 
 .menuHeader {
@@ -114,7 +115,7 @@ body {
   position: relative;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
-  animation: slide 0.6s ease-in-out;
+  animation: leftSlide 0.6s ease-in-out;
 }
 
 .difficultyButtonContainer {
@@ -122,19 +123,19 @@ body {
   position: relative;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  animation: slide 0.6s ease-in-out;
+  animation: leftSlide 0.6s ease-in-out;
     
 }
 
 .scoreHeader {
   position: relative;
   margin-top: -40px;
-  animation: scoreSlide 0.8s ease-in-out;
+  animation: leftSlide 0.8s ease-in-out;
 }
 
 .bestScore {
   position: relative;
-  animation: bestScoreSlide 0.8s ease-in-out;
+  animation: rightSlide 0.8s ease-in-out;
 }
 
 .startMenu {
@@ -162,7 +163,7 @@ body {
   font-size: 32px;
   color: #FFCC00;
   text-shadow: 0 0 25px #0075BE;
-  animation: header 0.5s ease-in-out;
+  animation: leftSlide 0.7s ease-in-out;
   letter-spacing: -1px;
 }
 
@@ -236,10 +237,14 @@ body {
 
 @keyframes startup {
   0% {
-    transform: scaleX(0);
+    transform: scaleX(1);
   }
 
-  40% {
+  20% {
+    transform: scaleX(0.3);
+  }
+
+  70% {
     transform: scaleX(1.5);
   }
 
@@ -262,7 +267,7 @@ body {
   }
 }
 
-@keyframes slide {
+@keyframes leftSlide {
   from {
     left: -100vw;
   }
@@ -272,31 +277,12 @@ body {
   }
 }
 
-@keyframes scoreSlide {
-  from {
-    left: -100vw;
-  }
-
-  to {
-    left: 0px;
-  }
-}
-
-@keyframes bestScoreSlide {
+@keyframes rightSlide {
   from {
     right: -100vw;
   }
 
   to {
     right: 0px;
-  }
-}
-
-@keyframes header {
-  from {
-    left: -100vw;
-  }
-  to {
-    left: 0px;
   }
 }
