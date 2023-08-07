@@ -9,7 +9,6 @@ const Score = ({ score, bestScore, updateBestScore }) => {
 	}, []);
 
 	useEffect(() => {
-		// Update bestScore if the current score is greater
 		if (score > bestScore) {
 			updateBestScore(score);
 			localStorage.setItem("bestScore", score);

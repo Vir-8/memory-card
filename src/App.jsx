@@ -1,5 +1,5 @@
-import { useState } from "react";
 import "./App.css";
+import { useState } from "react";
 import ImageGenerator from "./scripts/imageGenerator";
 import Score from "./components/score";
 import GenButton from "./components/genButton";
@@ -11,15 +11,15 @@ import DiffcultyButton from "./components/difficultyButton";
 function App() {
 	const [score, setScore] = useState(0);
 	const [bestScore, setBestScore] = useState(0);
-	const [genLoaded, setGenLoaded] = useState(false);
-	const [menuLoaded, setMenuLoaded] = useState(false);
-	const [genImagesLoaded, setGenImagesLoaded] = useState(false);
 
-	const [genDifficulty, setGenDifficulty] = useState(0);
+	const [menuLoaded, setMenuLoaded] = useState(false);
+	const [genLoaded, setGenLoaded] = useState(false);
+	const [genImagesLoaded, setGenImagesLoaded] = useState(false);
 	const [difficultyMenuLoaded, setDifficultyMenuLoaded] = useState(false);
 
 	const [min, setMin] = useState(0);
 	const [max, setMax] = useState(0);
+	const [genDifficulty, setGenDifficulty] = useState(0);
 	const genValues = ["1", "2", "3", "4", "5", "6", "7", "8"];
 
 	const updateImageStatus = (newValue) => {

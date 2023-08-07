@@ -9,7 +9,6 @@ export const getPokemonNumber = (score, min, max) => {
 	}
 
 	if (score > 0 && (score + 1) % state.reloadNumber === 0) {
-		state.pokeNumbers = [];
 		generateNewImages(min, max);
 	}
 
@@ -19,17 +18,15 @@ export const getPokemonNumber = (score, min, max) => {
 		}
 	}
 
-	//make sure all mons havent already been selected
 	if (newMons < 2) {
-		state.pokeNumbers = [];
 		generateNewImages(min, max);
 	}
-
 	return state.pokeNumbers;
 };
 
 function generateNewImages(min, max) {
 	let pokemonNum;
+	state.pokeNumbers = [];
 
 	for (let i = 0; i < 10; i++) {
 		do {

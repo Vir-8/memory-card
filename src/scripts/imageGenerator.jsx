@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import Image from "../components/image";
 import fetchPokemonData from "./pokemonData";
 import { getPokemonNumber, shuffleArray } from "./pokemonData";
 
@@ -9,27 +8,27 @@ const state = {
 	reloadNumber: 0,
 };
 
+const newReloadNumber = {
+	Easy: 4,
+	Medium: 6,
+	Hard: 8,
+};
+
 function ImageGenerator(props) {
 	const { score, getScore, status, updateStatus, min, max, difficulty } = props;
-
 	const [images, setImages] = useState([]);
+	const [reloadNumber, setReloadNumber] = useState(0);
+
 	const containerRef = useRef(null);
 	const timeoutRef = useRef(1000);
-	const [reloadNumber, setReloadNumber] = useState(0);
-	let newImages = [];
 
-	if (difficulty === "Easy") {
-		state.reloadNumber = 4;
-	} else if (difficulty === "Medium") {
-		state.reloadNumber = 6;
-	} else if (difficulty === "Hard") {
-		state.reloadNumber = 8;
-	}
+	let newImages = [];
+	state.reloadNumber = newReloadNumber[difficulty];
 
 	const GenerateImages = async () => {
 		getPokemonNumber(score, min, max);
-
 		shuffleArray(state.pokeNumbers);
+
 		let promises = state.pokeNumbers.map((pokemonNumber) =>
 			fetchPokemonData(pokemonNumber, handleImageClick)
 		);
@@ -79,7 +78,7 @@ function ImageGenerator(props) {
 
 	useEffect(() => {
 		setReloadNumber(state.reloadNumber);
-		timeoutRef.current = score === 0 || score % reloadNumber === 0 ? 2000 : 100;
+		timeoutRef.current = score === 0 || score % reloadNumber === 0 ? 1000 : 100;
 		getPokemonNumber(score, min, max);
 	}, [score]);
 
