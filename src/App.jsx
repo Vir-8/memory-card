@@ -89,7 +89,10 @@ function App() {
 			)}
 
 			{!menuLoaded && !genLoaded && (
-				<StartMenu onButtonClick={showMenu}></StartMenu>
+				<>
+					<h2 className="gameNameHeader">A Pokémon Memory Game</h2>
+					<StartMenu onButtonClick={showMenu}></StartMenu>
+				</>
 			)}
 		</>
 	);

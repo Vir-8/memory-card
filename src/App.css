@@ -59,7 +59,7 @@ body {
 
 .startButton {
   font-size: 1.4em;
-  padding: 1em 2.2em;
+  padding: 1em 2em;
   color: white;
   border-color: #0075BE;
   transition: transform 0.2s ease-in-out;
@@ -95,7 +95,7 @@ body {
 }
 
 .menuHeader {
-  animation: menuHeader 0.5s ease-in-out;
+  animation: menuHeader 0.7s ease-in-out;
 }
 
 .menuButton {
@@ -117,43 +117,6 @@ body {
   animation: slide 0.6s ease-in-out;
 }
 
-@keyframes startup {
-  0% {
-    transform: scaleX(0);
-  }
-
-  40% {
-    transform: scaleX(1.5);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes menuHeader {
-  0% {
-    transform: scaleX(0);
-  }
-
-  50% {
-    transform: scaleX(1.25);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes slide {
-  from {
-    left: -700px;
-  }
-  to {
-    left: 0px;
-  }
-}
-
 .scoreHeader {
   position: relative;
   margin-top: -40px;
@@ -163,25 +126,6 @@ body {
 .bestScore {
   position: relative;
   animation: bestScoreSlide 0.6s ease-in-out;
-}
-
-@keyframes scoreSlide {
-  from {
-    left: -700px;
-  }
-  to {
-    left: 0px;
-  }
-}
-
-@keyframes bestScoreSlide {
-  from {
-    right: -700px;
-  }
-
-  to {
-    right: 0px;
-  }
 }
 
 .startMenu {
@@ -202,6 +146,15 @@ body {
 .backButtonContainer button {
   width: 80px;
   color: white;
+}
+
+.gameNameHeader {
+  position: relative;
+  font-size: 32px;
+  color: #FFCC00;
+  text-shadow: 0 0 25px #0075BE;
+  animation: header 0.5s ease-in-out;
+  letter-spacing: -1px;
 }
 
 @media screen and (max-width: 870px) {
@@ -256,5 +209,72 @@ body {
     padding-top: 150px;
     margin-top: 70px;
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@keyframes startup {
+  0% {
+    transform: scaleX(0);
+  }
+
+  40% {
+    transform: scaleX(1.5);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes menuHeader {
+  0% {
+    transform: scaleX(0);
+  }
+
+  50% {
+    transform: scaleX(1.25);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes slide {
+  from {
+    left: -100vw;
+  }
+
+  to {
+    left: 0px;
+  }
+}
+
+@keyframes scoreSlide {
+  from {
+    left: -100vw;
+  }
+
+  to {
+    left: 0px;
+  }
+}
+
+@keyframes bestScoreSlide {
+  from {
+    right: -100vw;
+  }
+
+  to {
+    right: 0px;
+  }
+}
+
+@keyframes header {
+  from {
+    left: -100vw;
+  }
+  to {
+    left: 0px;
   }
 }
