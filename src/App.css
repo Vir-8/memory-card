@@ -92,7 +92,7 @@ body {
 }
 
 .animateHeader {
-  animation: startup 0.5s ease-in-out forwards;
+  animation: startup .45s ease infinite alternate;
 }
 
 .menuHeader {
@@ -244,20 +244,9 @@ body {
 }
 
 @keyframes startup {
-  0% {
-    transform: scaleX(1);
-  }
-
-  20% {
-    transform: scaleX(0.3);
-  }
-
-  70% {
-    transform: scaleX(1.5);
-  }
-
   100% {
-    transform: scale(1);
+    transform: translateY(-20px);
+    filter: drop-shadow(4px 8px);  
   }
 }
 
